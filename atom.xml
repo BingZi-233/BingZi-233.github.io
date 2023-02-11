@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://ashy.tk</id>
+    <title>自由的博客</title>
+    <updated>2023-02-11T01:54:41.702Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://ashy.tk"/>
+    <link rel="self" href="https://ashy.tk/atom.xml"/>
+    <subtitle>自由的博客，也是自由的博客。</subtitle>
+    <logo>https://ashy.tk/images/avatar.png</logo>
+    <icon>https://ashy.tk/favicon.ico</icon>
+    <rights>All rights reserved 2023, 自由的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[Java线程池的关于异常的坑（一）]]></title>
+        <id>https://ashy.tk/82ftdncpC/</id>
+        <link href="https://ashy.tk/82ftdncpC/">
+        </link>
+        <updated>2023-02-11T01:46:10.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="起因">起因</h1>
+<p>我在某一个编写代码并进行单元测试的时候发现结果数据怎么都不正确，但按照结果数据来推测执行中应该产生了至少一个错误。但在控制台我没有看到任何错误，随即我将代码进行了DEBUG调试，后发现异常确实被触发，但并没有抛出给调用者。也就是在线程池中就已经被处理了，后对这个问题进行了研究。</p>
+<h1 id="原因">原因</h1>
+<p>Java线程池有可能会吞掉异常，这是因为在Java线程池中，任务是在线程中执行的。如果在执行任务时发生异常，它将会在线程中被吞掉，而不会被外部捕获。这是因为线程池并不会显式地捕获异常，并且也不会将异常传递给调用者。</p>
+<h1 id="解决方法">解决方法</h1>
+<p>如果想避免这种情况，可以使用以下方法之一：</p>
+<ol>
+<li>在任务中捕获异常并处理它：您可以在任务的代码中捕获异常并处理它，以确保它不会被吞掉。</li>
+<li>使用FutureTask：您可以使用FutureTask来代替普通的任务，FutureTask可以用来获取执行任务时发生的异常。</li>
+<li>在线程池中配置异常处理器：您可以在线程池中配置异常处理器，以便在发生异常时处理它。</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[关于Minecraft Server Core的一些参数]]></title>
+        <id>https://ashy.tk/guan-yu-minecraft-server-core-de-yi-xie-can-shu/</id>
+        <link href="https://ashy.tk/guan-yu-minecraft-server-core-de-yi-xie-can-shu/">
+        </link>
+        <updated>2023-01-30T09:41:09.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>--forceUpgrade</li>
+</ol>
+<blockquote>
+<p>用来强制更新服务器地图区块的，一般只使用一次。（因为更新真的很浪费时间且没有必要</p>
+</blockquote>
+<ol>
+<li>nogui</li>
+</ol>
+<blockquote>
+<p>Windows环境下的一个参数，用来关闭掉服务端自带的那个UI界面。Linux在有图形化界面的情况下依旧适用，但不会真的有人用Linux还带图形化界面吧？</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Minecraft Server插件推荐]]></title>
+        <id>https://ashy.tk/minecraft-server-cha-jian-tui-jian/</id>
+        <link href="https://ashy.tk/minecraft-server-cha-jian-tui-jian/">
+        </link>
+        <updated>2023-01-27T09:02:37.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="基础部分">基础部分</h1>
+<ol>
+<li>EssentialsX</li>
+</ol>
+<blockquote>
+<p>母庸置疑，这个插件的支持上限至今是个谜团。而且具有众多的服务器都在使用，并且功能完整且优化到位。在我对服务器的多年性能排查的过程中，从来没有见到过这个插件出现性能问题。但是由于Wiki是纯英文，可能需要浏览器中的翻译功能搭配使用。</p>
+</blockquote>
+<ol start="2">
+<li>LuckPerms</li>
+</ol>
+<blockquote>
+<p>一个专门为了性能、易用而生的插件，支持使用MySQL等其他的数据库程序进行多服务器数据同步，并且还有网页应用等多个十分实用的程序。即使是新手在规划合理的情况下，也可以实现一些复杂功能。</p>
+</blockquote>
+<ol start="3">
+<li>TrMenu</li>
+</ol>
+<blockquote>
+<p>一个国产的菜单插件，拥有强大的脚本执行能力以及众多的其他功能。虽然有的时候会出现一些问题，但是开发者由于是国人，对于问题的修复也十分及时。</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[关于乱码的一些规律]]></title>
+        <id>https://ashy.tk/guan-yu-luan-ma-de-yi-xie-gui-lu/</id>
+        <link href="https://ashy.tk/guan-yu-luan-ma-de-yi-xie-gui-lu/">
+        </link>
+        <updated>2023-01-18T18:09:04.000Z</updated>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://img.fastmirror.net/s/2023/01/19/63c835ab8554d.jpeg" alt="f96f954a3009933a5a1bec84b81908ca.jpeg" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java Class Version 和Java之间的关系]]></title>
+        <id>https://ashy.tk/java-class-version-he-java-zhi-jian-de-guan-xi/</id>
+        <link href="https://ashy.tk/java-class-version-he-java-zhi-jian-de-guan-xi/">
+        </link>
+        <updated>2023-01-18T15:55:52.000Z</updated>
+        <content type="html"><![CDATA[<table>
+<thead>
+<tr>
+<th style="text-align:center">Java</th>
+<th style="text-align:center">Major Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">19</td>
+<td style="text-align:center">63</td>
+</tr>
+<tr>
+<td style="text-align:center">18</td>
+<td style="text-align:center">62</td>
+</tr>
+<tr>
+<td style="text-align:center">17</td>
+<td style="text-align:center">61</td>
+</tr>
+<tr>
+<td style="text-align:center">16</td>
+<td style="text-align:center">60</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">59</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center">58</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">57</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">56</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">55</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">54</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">53</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">52</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">51</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">50</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">49</td>
+</tr>
+<tr>
+<td style="text-align:center">1.4</td>
+<td style="text-align:center">48</td>
+</tr>
+<tr>
+<td style="text-align:center">1.3</td>
+<td style="text-align:center">47</td>
+</tr>
+<tr>
+<td style="text-align:center">1.2</td>
+<td style="text-align:center">46</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    </entry>
+</feed>

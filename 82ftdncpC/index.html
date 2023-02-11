@@ -1,0 +1,191 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Java线程池的关于异常的坑（一） | 自由的博客</title>
+<link rel="shortcut icon" href="https://ashy.tk/favicon.ico?v=1676080477487">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ashy.tk/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Java线程池的关于异常的坑（一） | 自由的博客 - Atom Feed" href="https://ashy.tk/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="起因
+我在某一个编写代码并进行单元测试的时候发现结果数据怎么都不正确，但按照结果数据来推测执行中应该产生了至少一个错误。但在控制台我没有看到任何错误，随即我将代码进行了DEBUG调试，后发现异常确实被触发，但并没有抛出给调用者。也就是在线程..." />
+    <meta name="keywords" content="Java" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://ashy.tk">
+  <img class="avatar" src="https://ashy.tk/images/avatar.png?v=1676080477487" alt="">
+  </a>
+  <h1 class="site-title">
+    自由的博客
+  </h1>
+  <p class="site-description">
+    自由的博客，也是自由的博客。
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://www.github.com/BingZi-233" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Java线程池的关于异常的坑（一）
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-02-11
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://ashy.tk/NUo9NyOH_/" class="post-tag">
+                  # Java
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://ashy.tk/post-images/82ftdncpC.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h1 id="起因">起因</h1>
+<p>我在某一个编写代码并进行单元测试的时候发现结果数据怎么都不正确，但按照结果数据来推测执行中应该产生了至少一个错误。但在控制台我没有看到任何错误，随即我将代码进行了DEBUG调试，后发现异常确实被触发，但并没有抛出给调用者。也就是在线程池中就已经被处理了，后对这个问题进行了研究。</p>
+<h1 id="原因">原因</h1>
+<p>Java线程池有可能会吞掉异常，这是因为在Java线程池中，任务是在线程中执行的。如果在执行任务时发生异常，它将会在线程中被吞掉，而不会被外部捕获。这是因为线程池并不会显式地捕获异常，并且也不会将异常传递给调用者。</p>
+<h1 id="解决方法">解决方法</h1>
+<p>如果想避免这种情况，可以使用以下方法之一：</p>
+<ol>
+<li>在任务中捕获异常并处理它：您可以在任务的代码中捕获异常并处理它，以确保它不会被吞掉。</li>
+<li>使用FutureTask：您可以使用FutureTask来代替普通的任务，FutureTask可以用来获取执行任务时发生的异常。</li>
+<li>在线程池中配置异常处理器：您可以在线程池中配置异常处理器，以便在发生异常时处理它。</li>
+</ol>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E8%B5%B7%E5%9B%A0">起因</a></li>
+<li><a href="#%E5%8E%9F%E5%9B%A0">原因</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95">解决方法</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://ashy.tk/guan-yu-minecraft-server-core-de-yi-xie-can-shu/">
+              <h3 class="post-title">
+                关于Minecraft Server Core的一些参数
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  
+  <a class="rss" href="https://ashy.tk/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
